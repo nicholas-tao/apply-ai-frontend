@@ -102,6 +102,33 @@ function uploadResume() {
   };
 }
 
+function sendResumeUpdated() {
+  let data = "something"; //data is the updated resume data json
+
+  var formData = new FormData();
+  formData.append("data", data); //data is the updated resume data json
+  formData.append("uid", uid);
+
+  async () => {
+    const rawResponse = await fetch("https://api.apply-ai.online/update", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    });
+    const content = await rawResponse.json();
+
+    console.log("content: " + content);
+    if (content.body.success) {
+      window.location.href = "/viewjobs.html";
+    } else {
+      console.log("not successful update");
+    }
+  };
+}
+
 !(function ($) {
   "use strict";
 
