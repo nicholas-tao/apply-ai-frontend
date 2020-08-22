@@ -1,9 +1,4 @@
-/**
- * Template Name: Vesperr - v2.2.0
- * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
+var uid; //global variable for userid
 
 function sendEmail() {
   let email = document.getElementById("exampleInputEmail1").value;
@@ -17,8 +12,10 @@ function sendEmail() {
     let formData = new FormData();
     formData.append("email", email);
 
+    let fetchURL = "/start?email=" + email;
+
     (async () => {
-      const rawResponse = await fetch("ROUTE-GOES-HERE", {
+      const rawResponse = await fetch(fetchURL, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -46,7 +43,7 @@ function sendCode() {
   formData.append("pin", verificationCode);
 
   (async () => {
-    const rawResponse = await fetch("ROUTE-GOES-HERE", {
+    const rawResponse = await fetch("/start", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -58,7 +55,8 @@ function sendCode() {
 
     console.log(content);
     if (content.body.success) {
-      window.location.href = "/upload.html";
+      uid = content.body.uid;
+      window.location.href = "/uploadresume.html";
     } else {
       document.getElementById("verification-error").style.visibility =
         "visible";
@@ -72,6 +70,19 @@ function sendCode() {
 function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+}
+
+function uploadResume() {
+  var input = document.querySelector('input[type="file"]');
+
+  var data = new FormData();
+  data.append("file", input.files[0]);
+  data.append("uid", uid);
+
+  fetch("/upload", {
+    method: "POST",
+    body: data,
+  });
 }
 
 !(function ($) {
