@@ -14,15 +14,17 @@ function sendEmail() {
     document.getElementById("email-error").innerText =
       "Confirmation email sent!";
     document.getElementById("verification-div").style.visibility = "visible";
+    let formData = new FormData();
+    formData.append("email", email);
 
     (async () => {
       const rawResponse = await fetch("ROUTE-GOES-HERE", {
-        method: "POST",
+        method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email }),
+        body: formData,
       });
       const content = await rawResponse.json();
 
@@ -38,6 +40,10 @@ function sendEmail() {
 
 function sendCode() {
   let verificationCode = document.getElementById("verification-field").value;
+  let email = document.getElementById("exampleInputEmail1").value;
+  let formData = new FormData();
+  formData.append("email", email);
+  formData.append("pin", verificationCode);
 
   (async () => {
     const rawResponse = await fetch("ROUTE-GOES-HERE", {
@@ -46,7 +52,7 @@ function sendCode() {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, code: verificationCode }),
+      body: formData,
     });
     const content = await rawResponse.json();
 
