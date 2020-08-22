@@ -91,15 +91,101 @@ function uploadResume() {
     const content = await rawResponse.json();
 
     console.log("content: " + content);
+
     if (content.body.success) {
       window.location.href = "/editresume.html";
-      let parsedResumeData = content.body.data; //json of parsed resume data
+      console.log("ade it");
+      //CHANGE THIS VARIABLE TO parsedResumeData after!!!
+      let parsedResumeData2 = content.body.data; //json of parsed resume data
 
-      //populate resume data textfields with data from parsedResumeData HERE!!!
+      //this is a testing object representing the response i get from backend
+      let parsedResumeData = {
+        name: "zaina qasim",
+        phone_number: "(513) 739 4757",
+        email: "qasimza@mail.uc.edu",
+        degree: "bs",
+        locations: ["cincinnati", "matlab", "india"],
+        skills: [
+          "java, python, c++",
+          "adobe indesign",
+          "adobe illustrator",
+          "adobe dreamweaver",
+          "microsoft",
+          "coursera",
+          "university of cincinnati",
+          "ieee@uc",
+          "indian council of secondary education",
+          "infinera corporation",
+        ],
+        socials: {
+          linkedin: "linkedin.com/in/zaina-qasim-87706a17b",
+          github: "https://github.com/qasimza",
+        },
+      };
+
+      populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
     } else {
       console.log("not successful upload of resume");
     }
   };
+}
+
+//this is a testing object representing the response i get from backend
+let parsedResumeData = {
+  name: "zaina qasim",
+  phone_number: "(513) 739 4757",
+  email: "qasimza@mail.uc.edu",
+  degree: "bs",
+  locations: ["cincinnati", "matlab", "india"],
+  skills: [
+    "java, python, c++",
+    "adobe indesign",
+    "adobe illustrator",
+    "adobe dreamweaver",
+    "microsoft",
+    "coursera",
+    "university of cincinnati",
+    "ieee@uc",
+    "indian council of secondary education",
+    "infinera corporation",
+  ],
+  socials: {
+    linkedin: "linkedin.com/in/zaina-qasim-87706a17b",
+    github: "https://github.com/qasimza",
+  },
+};
+
+populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
+
+function populateResumeFields(parsedResumeData) {
+  console.log("called");
+  document.getElementById("full-name").value = parsedResumeData.name;
+  document.getElementById("email").value = parsedResumeData.email;
+  document.getElementById("phone").value = parsedResumeData.phone_number;
+  document.getElementById("linkedin").value = parsedResumeData.socials.github;
+  document.getElementById("skills").value = parsedResumeData.skills;
+  document.getElementById("school").value = "University of Waterloo";
+  document.getElementById("school-info").value =
+    parsedResumeData.degree.toUpperCase() + ", Computer Science";
+  document.getElementById("grad-year").value = "2022";
+  document.getElementById("company1").value = "Facebook";
+  document.getElementById("title1").value = "Software Engineer Intern";
+  document.getElementById("dates1").value = "May 2020-Aug 2020";
+  document.getElementById("description1").value =
+    "Built modern applications with JAVA, Spring, Spring Boot, SQL Server, No SQL.\n\nDeveloped microservices and Web Services (incl. REST/SOAP/WSDL/XML/SOA).\n\nBuilt on Pivotal Cloud Foundry Platform (Gradle, GitHub).\n\nContinuously integrated and deployed developed software. Updated the continuous integration/deployment scripts as necessary to improve continuous integration practices.";
+
+  document.getElementById("company2").value = "Google";
+  document.getElementById("title2").value = "Software Engineer Intern";
+  document.getElementById("dates2").value = "May 2019-Aug 2019";
+  document.getElementById("description2").value =
+    "Composed an app to allow voice control of lights, garage door, and home thermostat, using an Amazon Echo and Raspberry Pi.\n\nBuilt a real-time stock picking app that compares the current price to Uniform Adjusted Financial Reporting Standards data to identify buy-now opportunities.\n\nBuilt new search functionality into the next generation StratoDB scalable database management system.";
+
+  document.getElementById("company3").value = "Amazon";
+  document.getElementById("title3").value =
+    "Software Development Engineer Intern";
+  document.getElementById("dates3").value = "May 2018-Aug 2018";
+  document.getElementById("description3").value =
+    "Structure several internal systems comprising order entry/management tools, conversion/revenue reporting, and production workflow tracking, as well as designed custom REST APIs built in Python, Laravel PHP, and NodeJS.\n\nSuccessfully installed Linux servers and virtualized environments using Docker, Hyper-V, and Amazon Web Services.\n\nDesigned and implemented PHP web application, streamlining high-server traffic resource configuration and allocation.";
 }
 
 function sendResumeUpdated() {
@@ -108,7 +194,7 @@ function sendResumeUpdated() {
   var formData = new FormData();
   formData.append("data", data); //data is the updated resume data json
   formData.append("uid", uid);
-
+  console.log("clickd");
   async () => {
     const rawResponse = await fetch("https://api.apply-ai.online/update", {
       method: "POST",

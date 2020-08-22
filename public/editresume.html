@@ -46,10 +46,10 @@
 
   <body>
     <div class="container">
-      <div class="section-title" data-aos="fade-up">
+      <div class="section-title">
         <h2 style="margin-top: 5vh;">Edit Resume Details</h2>
       </div>
-      <div class="row">
+      <div class="row" data-aos="fade-up">
         <div class="col-md-4" id="education">
           <h2>Education</h2>
           <form>
@@ -59,11 +59,11 @@
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Degree, Major(s)</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="school-info" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Grad Year</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="grad-year" />
             </div>
           </form>
         </div>
@@ -75,7 +75,11 @@
               <label for="exampleInputEmail1"
                 >List of skills (comma-seperated)</label
               >
-              <textarea class="form-control" id="school"></textarea>
+              <textarea
+                class="form-control"
+                id="skills"
+                style="height: 25vh;"
+              ></textarea>
             </div>
           </form>
         </div>
@@ -85,47 +89,51 @@
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Name</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="full-name" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Email</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="email" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Phone</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="phone" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">LinkedIn</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="linkedin" />
             </div>
           </form>
         </div>
       </div>
-      <div class="row" id="jobs">
+      <div class="row" id="jobs" data-aos="fade-up">
         <div class="col-md-4" id="education">
           <h2>Experience</h2>
         </div>
       </div>
-      <div class="row" id="jobs">
+      <div class="row" id="jobs" data-aos="fade-up">
         <div class="col-md-4" id="education">
           <h4>Job 1</h4>
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Company</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="company1" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Title</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="title1" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Dates</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="dates1" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Description</label>
-              <textarea class="form-control" id="school"></textarea>
+              <textarea
+                class="form-control"
+                id="description1"
+                style="height: 25vh;"
+              ></textarea>
             </div>
           </form>
         </div>
@@ -134,19 +142,23 @@
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Company</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="company2" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Title</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="title2" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Dates</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="dates2" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Description</label>
-              <textarea class="form-control" id="school"></textarea>
+              <textarea
+                class="form-control"
+                id="description2"
+                style="height: 25vh;"
+              ></textarea>
             </div>
           </form>
         </div>
@@ -155,26 +167,30 @@
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Company</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="company3" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Title</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="title3" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Dates</label>
-              <input class="form-control" id="school" />
+              <input class="form-control" id="dates3" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Description</label>
-              <textarea class="form-control" id="school"></textarea>
+              <textarea
+                class="form-control"
+                id="description3"
+                style="height: 25vh;"
+              ></textarea>
             </div>
           </form>
         </div>
       </div>
       <a
         onclick="sendResumeUpdated()"
-        class="btn-start scrollto"
+        class="btn-start"
         style="
           margin-left: 34vw;
           margin-top: 5vh;
