@@ -12,7 +12,7 @@ function sendEmail() {
     let formData = new FormData();
     formData.append("email", email);
 
-    let fetchURL = "/start?email=" + email;
+    let fetchURL = "https://api.apply-ai.online/start?email=" + email;
 
     (async () => {
       const rawResponse = await fetch(fetchURL, {
@@ -43,7 +43,7 @@ function sendCode() {
   formData.append("pin", verificationCode);
 
   (async () => {
-    const rawResponse = await fetch("/start", {
+    const rawResponse = await fetch("https://api.apply-ai.online/start", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -79,7 +79,7 @@ function uploadResume() {
   data.append("file", input.files[0]);
   data.append("uid", uid);
 
-  fetch("/upload", {
+  fetch("https://api.apply-ai.online/upload", {
     method: "POST",
     body: data,
   });
