@@ -162,7 +162,7 @@ function populateResumeFields(parsedResumeData) {
   document.getElementById("full-name").value = parsedResumeData.name;
   document.getElementById("email").value = parsedResumeData.email;
   document.getElementById("phone").value = parsedResumeData.phone_number;
-  document.getElementById("linkedin").value = parsedResumeData.socials.github;
+  document.getElementById("linkedin").value = parsedResumeData.socials.linkedin;
   document.getElementById("skills").value = parsedResumeData.skills;
   document.getElementById("school").value = "University of Waterloo";
   document.getElementById("school-info").value =
@@ -189,7 +189,38 @@ function populateResumeFields(parsedResumeData) {
 }
 
 function sendResumeUpdated() {
-  let data = "something"; //data is the updated resume data json
+  let data = {
+    name: document.getElementById("full-name").value,
+    email: document.getElementById("email").value,
+    phone_number: document.getElementById("phone").value,
+    socials: {
+      linkedin: document.getElementById("linkedin").value,
+    },
+    skills: document.getElementById("skills").value,
+    school: document.getElementById("school").value,
+    school_info: document.getElementById("school-info").value,
+    grad_year: document.getElementById("grad-year").value,
+    jobs: {
+      [0]: {
+        company: document.getElementById("company1").value,
+        title: document.getElementById("title1").value,
+        dates: document.getElementById("dates1").value,
+        description: document.getElementById("description1").value,
+      },
+      [1]: {
+        company: document.getElementById("company2").value,
+        title: document.getElementById("title2").value,
+        dates: document.getElementById("dates2").value,
+        description: document.getElementById("description2").value,
+      },
+      [2]: {
+        company: document.getElementById("company3").value,
+        title: document.getElementById("title3").value,
+        dates: document.getElementById("dates3").value,
+        description: document.getElementById("description3").value,
+      },
+    },
+  }; //data is the updated resume data json
 
   var formData = new FormData();
   formData.append("data", data); //data is the updated resume data json
