@@ -93,6 +93,9 @@ function uploadResume() {
     console.log("content: " + content);
     if (content.body.success) {
       window.location.href = "/editresume.html";
+      let parsedResumeData = content.body.data; //json of parsed resume data
+
+      //populate resume data textfields with data from parsedResumeData HERE!!!
     } else {
       console.log("not successful upload of resume");
     }
