@@ -1,9 +1,4 @@
-/**
- * Template Name: Vesperr - v2.2.0
- * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
+var uid; //global variable for userid
 
 function sendEmail() {
   let email = document.getElementById("exampleInputEmail1").value;
@@ -17,8 +12,10 @@ function sendEmail() {
     let formData = new FormData();
     formData.append("email", email);
 
+    let fetchURL = "https://api.apply-ai.online/start?email=" + email;
+    console.log("Fetchurl " + fetchURL);
     (async () => {
-      const rawResponse = await fetch("ROUTE-GOES-HERE", {
+      const rawResponse = await fetch(fetchURL, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -46,7 +43,7 @@ function sendCode() {
   formData.append("pin", verificationCode);
 
   (async () => {
-    const rawResponse = await fetch("ROUTE-GOES-HERE", {
+    const rawResponse = await fetch("https://api.apply-ai.online/start", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -58,7 +55,8 @@ function sendCode() {
 
     console.log(content);
     if (content.body.success) {
-      window.location.href = "/upload.html";
+      uid = content.body.uid;
+      window.location.href = "/uploadresume.html";
     } else {
       document.getElementById("verification-error").style.visibility =
         "visible";
@@ -72,6 +70,63 @@ function sendCode() {
 function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+}
+
+function uploadResume() {
+  var input = document.querySelector('input[type="file"]');
+
+  var formData = new FormData();
+  formData.append("file", input.files[0]);
+  formData.append("uid", uid);
+
+  async () => {
+    const rawResponse = await fetch("https://api.apply-ai.online/upload", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    });
+    const content = await rawResponse.json();
+
+    console.log("content: " + content);
+    if (content.body.success) {
+      window.location.href = "/editresume.html";
+      let parsedResumeData = content.body.data; //json of parsed resume data
+
+      //populate resume data textfields with data from parsedResumeData HERE!!!
+    } else {
+      console.log("not successful upload of resume");
+    }
+  };
+}
+
+function sendResumeUpdated() {
+  let data = "something"; //data is the updated resume data json
+
+  var formData = new FormData();
+  formData.append("data", data); //data is the updated resume data json
+  formData.append("uid", uid);
+
+  async () => {
+    const rawResponse = await fetch("https://api.apply-ai.online/update", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    });
+    const content = await rawResponse.json();
+
+    console.log("content: " + content);
+    if (content.body.success) {
+      window.location.href = "/viewjobs.html";
+    } else {
+      console.log("not successful update");
+    }
+  };
 }
 
 !(function ($) {
