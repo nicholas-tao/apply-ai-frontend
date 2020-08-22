@@ -155,7 +155,7 @@ let parsedResumeData = {
   },
 };
 
-populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
+//populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
 
 function populateResumeFields(parsedResumeData) {
   console.log("called");
@@ -225,7 +225,9 @@ function sendResumeUpdated() {
   var formData = new FormData();
   formData.append("data", data); //data is the updated resume data json
   formData.append("uid", uid);
-  console.log("clickd");
+  console.log("data: " + JSON.stringify(data));
+  window.location.href = "/viewjobs.html";
+
   async () => {
     const rawResponse = await fetch("https://api.apply-ai.online/update", {
       method: "POST",
