@@ -13,7 +13,7 @@ function sendEmail() {
     formData.append("email", email);
 
     let fetchURL = "https://api.apply-ai.online/start?email=" + email;
-
+    console.log("Fetchurl " + fetchURL);
     (async () => {
       const rawResponse = await fetch(fetchURL, {
         method: "GET",
@@ -75,14 +75,28 @@ function validateEmail(email) {
 function uploadResume() {
   var input = document.querySelector('input[type="file"]');
 
-  var data = new FormData();
-  data.append("file", input.files[0]);
-  data.append("uid", uid);
+  var formData = new FormData();
+  formData.append("file", input.files[0]);
+  formData.append("uid", uid);
 
-  fetch("https://api.apply-ai.online/upload", {
-    method: "POST",
-    body: data,
-  });
+  async () => {
+    const rawResponse = await fetch("https://api.apply-ai.online/upload", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    });
+    const content = await rawResponse.json();
+
+    console.log("content: " + content);
+    if (content.body.success) {
+      window.location.href = "/editresume.html";
+    } else {
+      console.log("not successful upload of resume");
+    }
+  };
 }
 
 !(function ($) {
