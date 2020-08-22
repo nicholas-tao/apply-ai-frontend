@@ -39,6 +39,19 @@
   cursor: pointer;
 }
 
+.wrapper1 {
+  text-align: center;
+}
+
+.form-control-file {
+  margin-left: 10vw;
+  margin-bottom: 2vh;
+}
+
+.upload-resume-section {
+  margin-top: 30vh;
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
