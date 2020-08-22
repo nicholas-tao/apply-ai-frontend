@@ -37,7 +37,30 @@ function sendEmail() {
 }
 
 function sendCode() {
-  window.location.href = "/upload.html";
+  let verificationCode = document.getElementById("verification-field").value;
+
+  (async () => {
+    const rawResponse = await fetch("ROUTE-GOES-HERE", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, code: verificationCode }),
+    });
+    const content = await rawResponse.json();
+
+    console.log(content);
+    if (content.body.success) {
+      window.location.href = "/upload.html";
+    } else {
+      document.getElementById("verification-error").style.visibility =
+        "visible";
+      document.getElementById("email-error").style.color = "Red";
+      document.getElementById("email-error").innerText =
+        "Invalid code. Please try again";
+    }
+  })();
 }
 
 function validateEmail(email) {
