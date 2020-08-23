@@ -356,6 +356,8 @@ function getJobs() {
   let urlArray = currURL.split("?uid=");
   let uid = urlArray[1];
   let fetchURL = "https://api.apply-ai.online/jobs?uid=" + uid;
+  displayJobs(jobsList); //delete this later
+
   async () => {
     const rawResponse = await fetch(fetchURL, {
       method: "GET",
@@ -367,7 +369,6 @@ function getJobs() {
 
     console.log("content: " + content);
     //displayJobs(content) //uncomment this LATER
-    displayJobs(jobsList); //delete this later
   };
 }
 
