@@ -91,7 +91,7 @@ function uploadResume() {
     body: formData,
   })
     .then((response) => response.text())
-    .then((result) => fooFunction(JSON.parse(result).data, uid))
+    .then((result) => fooFunction(result, uid))
     .catch((error) => console.log("error", error));
 }
 
@@ -130,7 +130,7 @@ function fooFunction(result, uid) {
     window.location.href = redURL;
     //console.log("ade it");
     //CHANGE THIS VARIABLE TO parsedResumeData after!!!
-    let parsedResumeData2 = result; //json of parsed resume data
+    let parsedResumeData2 = res.data; //json of parsed resume data
 
     //this is a testing object representing the response i get from backend
     let parsedResumeData = {
@@ -183,13 +183,13 @@ function fooFunction2(result) {
   let parsedResumeData2 = JSON.parse(result);
   let parsedResumeData = parsedResumeData2.data;
   console.log(parsedResumeData);
-  /*
+
   document.getElementById("full-name").value = parsedResumeData.name;
   document.getElementById("email").value = parsedResumeData.email;
   document.getElementById("phone").value = parsedResumeData.phone_number;
   document.getElementById("linkedin").value = parsedResumeData.socials.linkedin;
   document.getElementById("skills").value = parsedResumeData.skills;
-  */
+  /*
   document.getElementById("full-name").value = "John Doe";
   document.getElementById("email").value = "john.doe@gmail.com";
   document.getElementById("phone").value = "+1-123-456-7890";
@@ -220,6 +220,7 @@ function fooFunction2(result) {
   document.getElementById("dates3").value = "May 2017-Aug 2017";
   document.getElementById("description3").value =
     "Structure several internal systems comprising order entry/management tools, conversion/revenue reporting, and production workflow tracking, as well as designed custom REST APIs built in Python, Laravel PHP, and NodeJS.\n\nSuccessfully installed Linux servers and virtualized environments using Docker, Hyper-V, and Amazon Web Services.\n\nDesigned and implemented PHP web application, streamlining high-server traffic resource configuration and allocation.\n\nSetup, schema design and management of Amazon Redshift. Built an internal app for access to the data using a web interface. Dataduct integration for daily ETL injection into Redshift.";
+*/
 }
 
 function sendResumeUpdated() {
