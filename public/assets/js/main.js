@@ -15,7 +15,6 @@ function sendEmail() {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
       });
       const content = await rawResponse.json();
@@ -33,6 +32,8 @@ function sendEmail() {
 function sendCode() {
   let verificationCode = document.getElementById("verification-field").value;
   let email = document.getElementById("exampleInputEmail1").value;
+  console.log("code: " + verificationCode);
+  console.log("email: " + email);
   let formData = new FormData();
   formData.append("email", email);
   formData.append("pin", verificationCode);
@@ -42,7 +43,6 @@ function sendCode() {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
       },
       body: formData,
     });
@@ -80,7 +80,6 @@ function uploadResume() {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
       },
       body: formData,
     });
@@ -164,7 +163,6 @@ function populateResumeFields(uid) {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
       },
     });
     const content = await rawResponse.json();
@@ -251,7 +249,6 @@ function sendResumeUpdated() {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
       },
       body: formData,
     });
@@ -335,7 +332,6 @@ function getJobs() {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
       },
     });
     const content = await rawResponse.json();
@@ -423,7 +419,6 @@ function applyToJobs() {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
       },
     });
     const content = await rawResponse.json();
