@@ -248,6 +248,23 @@ function sendResumeUpdated() {
   };
 }
 
+function getJobs() {
+  console.log("this was called " + uid);
+  let fetchURL = "https://api.apply-ai.online/uid=" + uid;
+  async () => {
+    const rawResponse = await fetch(fetchURL, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const content = await rawResponse.json();
+
+    console.log("content: " + content.body);
+  };
+}
+
 !(function ($) {
   "use strict";
 
