@@ -48,8 +48,7 @@
           let currURL = window.location.href;
           let urlArray = currURL.split("?uid=");
           let uid = urlArray[1];
-          let redURL = "/editresume.html?uid=" + uid;
-          populateResumeFields(); //get jobs when page loads
+          populateResumeFields(uid); //get jobs when page loads
         };
       }
     </script>
