@@ -71,6 +71,11 @@ function validateEmail(email) {
 function uploadResume() {
   var input = document.querySelector('input[type="file"]');
 
+  let currURL = window.location.href;
+  let urlArray = currURL.split("?uid=");
+  let uid = urlArray[1];
+  console.log(uid);
+
   var formData = new FormData();
   formData.append("file", input.files[0]);
   formData.append("uid", uid);
