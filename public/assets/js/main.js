@@ -194,15 +194,15 @@ function fooFunction2(result) {
   document.getElementById("email").value = "john.doe@gmail.com";
   document.getElementById("phone").value = "+1-123-456-7890";
   document.getElementById("linkedin").value = "linkedin.com/johnode";
-  document.getElementById("skills").value = parsedResumeData.skills;
+  document.getElementById("skills").value =
+    "JAVA, Spring, Spring Boot, SQL, REST/SOAP/WSDL/WSL/SOA, Grade, GitHub, Rasberry Pi, Python, Laravel, PHP, NodeJS, Docker, Amazon Web Services";
   document.getElementById("school").value = "University of Waterloo";
   if (parsedResumeData.degree) {
     document.getElementById("school-info").value =
       parsedResumeData.degree.toUpperCase() + ", Computer Science";
   } else {
-    document.getElementById(
-      "school-info"
-    ).value = +"Bachelor of Computer Science, Computer Science";
+    document.getElementById("school-info").value =
+      "Bachelor of Computer Science, Computer Science";
   }
   document.getElementById("grad-year").value = "2018";
   document.getElementById("company1").value = "Facebook";
@@ -367,9 +367,9 @@ function getJobs() {
 
     console.log("content: " + content);
     //displayJobs(content) //uncomment this LATER
+    displayJobs(jobsList); //delete this later
   };
 }
-//displayJobs(jobsList); //delete this later
 
 function displayJobs(jobsList) {
   if (jobsList[0]) {
