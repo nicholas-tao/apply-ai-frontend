@@ -81,23 +81,23 @@ function uploadResume() {
   formData.append("uid", uid);
   console.log("hi");
 
-  const rawResponse = fetch("https://api.apply-ai.online/upload", {
+  let content = {};
+
+  fetch("https://api.apply-ai.online/upload", {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Access-Control-Allow-Credentials": "true",
     },
     body: formData,
-    redirect: "follow",
-  });
-  const content = rawResponse.json();
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      content = JSON.parse(data);
+    });
 
-  console.log("content: " + content);
+  console.log("content.success: " + content.success);
 
   if (content.success) {
-    let currURL = window.location.href;
-    let urlArray = currURL.split("?uid=");
-    let uid = urlArray[1];
     let redURL = "/editresume.html?uid=" + uid;
     window.location.href = redURL;
     //console.log("ade it");
@@ -163,6 +163,7 @@ let parsedResumeData = {
 //populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
 
 function populateResumeFields(uid) {
+  let parsedResumeData = {};
   async () => {
     let fetchURL = "https://api.apply-ai.online/resume?uid=" + uid;
     const rawResponse = await fetch(fetchURL, {
@@ -172,8 +173,8 @@ function populateResumeFields(uid) {
       },
     });
     const content = await rawResponse.json();
+    parsedResumeData = content;
   };
-  let parsedResumeData = content;
   //console.log("called");
   document.getElementById("full-name").value = parsedResumeData.name;
   document.getElementById("email").value = parsedResumeData.email;
