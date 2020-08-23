@@ -75,63 +75,64 @@ function uploadResume() {
   let urlArray = currURL.split("?uid=");
   let uid = urlArray[1];
   console.log(uid);
-
+  console.log(input.files[0].name);
   var formData = new FormData();
-  formData.append("file", input.files[0]);
+  formData.append("file", input.files[0], input.files[0].name);
   formData.append("uid", uid);
+  console.log("hi");
 
-  async () => {
-    const rawResponse = await fetch("https://api.apply-ai.online/upload", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
+  const rawResponse = fetch("https://api.apply-ai.online/upload", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Access-Control-Allow-Credentials": "true",
+    },
+    body: formData,
+    redirect: "follow",
+  });
+  const content = rawResponse.json();
+
+  console.log("content: " + content);
+
+  if (content.success) {
+    let currURL = window.location.href;
+    let urlArray = currURL.split("?uid=");
+    let uid = urlArray[1];
+    let redURL = "/editresume.html?uid=" + uid;
+    window.location.href = redURL;
+    //console.log("ade it");
+    //CHANGE THIS VARIABLE TO parsedResumeData after!!!
+    let parsedResumeData2 = content.data; //json of parsed resume data
+
+    //this is a testing object representing the response i get from backend
+    let parsedResumeData = {
+      name: "zaina qasim",
+      phone_number: "(513) 739 4757",
+      email: "qasimza@mail.uc.edu",
+      degree: "bs",
+      locations: ["cincinnati", "matlab", "india"],
+      skills: [
+        "java, python, c++",
+        "adobe indesign",
+        "adobe illustrator",
+        "adobe dreamweaver",
+        "microsoft",
+        "coursera",
+        "university of cincinnati",
+        "ieee@uc",
+        "indian council of secondary education",
+        "infinera corporation",
+      ],
+      socials: {
+        linkedin: "linkedin.com/in/zaina-qasim-87706a17b",
+        github: "https://github.com/qasimza",
       },
-      body: formData,
-    });
-    const content = await rawResponse.json();
+    };
 
-    console.log("content: " + content);
-
-    if (content.success) {
-      let currURL = window.location.href;
-      let urlArray = currURL.split("?uid=");
-      let uid = urlArray[1];
-      let redURL = "/editresume.html?uid=" + uid;
-      window.location.href = redURL;
-      //console.log("ade it");
-      //CHANGE THIS VARIABLE TO parsedResumeData after!!!
-      let parsedResumeData2 = content.data; //json of parsed resume data
-
-      //this is a testing object representing the response i get from backend
-      let parsedResumeData = {
-        name: "zaina qasim",
-        phone_number: "(513) 739 4757",
-        email: "qasimza@mail.uc.edu",
-        degree: "bs",
-        locations: ["cincinnati", "matlab", "india"],
-        skills: [
-          "java, python, c++",
-          "adobe indesign",
-          "adobe illustrator",
-          "adobe dreamweaver",
-          "microsoft",
-          "coursera",
-          "university of cincinnati",
-          "ieee@uc",
-          "indian council of secondary education",
-          "infinera corporation",
-        ],
-        socials: {
-          linkedin: "linkedin.com/in/zaina-qasim-87706a17b",
-          github: "https://github.com/qasimza",
-        },
-      };
-
-      //populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
-    } else {
-      console.log("not successful upload of resume");
-    }
-  };
+    //populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
+  } else {
+    console.log("not successful upload of resume");
+  }
 }
 
 //this is a testing object representing the response i get from backend
@@ -330,7 +331,9 @@ let jobsList = {
 };
 
 function getJobs() {
-  console.log("this was called " + uid);
+  let currURL = window.location.href;
+  let urlArray = currURL.split("?uid=");
+  let uid = urlArray[1];
   let fetchURL = "https://api.apply-ai.online/jobs?uid=" + uid;
   async () => {
     const rawResponse = await fetch(fetchURL, {
