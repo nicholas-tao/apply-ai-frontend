@@ -7,8 +7,6 @@ function sendEmail() {
     document.getElementById("email-error").innerText =
       "Confirmation email sent!";
     document.getElementById("verification-div").style.visibility = "visible";
-    let formData = new FormData();
-    formData.append("email", email);
 
     let fetchURL = "https://api.apply-ai.online/start?email=" + email;
     console.log("Fetchurl " + fetchURL);
@@ -19,7 +17,6 @@ function sendEmail() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: formData,
       });
       const content = await rawResponse.json();
 
