@@ -189,6 +189,17 @@ function fooFunction2(result) {
   document.getElementById("phone").value = parsedResumeData.phone_number;
   document.getElementById("linkedin").value = parsedResumeData.socials.linkedin;
   document.getElementById("skills").value = parsedResumeData.skills;
+  document.getElementById("school").value = parsedResumeData.degree;
+  for (let j = 0; j < parsedResumeData.jobs.length; j++) {
+    let company = parsedResumeData.jobs[j].company;
+    let dates = parsedResumeData.jobs[j].dates;
+    let description = parsedResumeData.jobs[j].description;
+    let title = parsedResumeData.jobs[j].title;
+    document.getElementById("company" + (j + 1)).value = company;
+    document.getElementById("title" + (j + 1)).value = title;
+    document.getElementById("dates" + (j + 1)).value = dates;
+    document.getElementById("description" + (j + 1)).value = description;
+  }
   /*
   document.getElementById("full-name").value = "John Doe";
   document.getElementById("email").value = "john.doe@gmail.com";
