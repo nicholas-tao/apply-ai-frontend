@@ -1,5 +1,7 @@
 # ApplyAI (apply-ai.online)
 
+[Live Version](https://apply-ai.online)
+
 [Visit Devpost Page](https://devpost.com/software/applyai)
 
 [Demo Video](https://www.youtube.com/watch?v=7Sxl3rX8u4U)
