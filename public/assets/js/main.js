@@ -1,5 +1,3 @@
-var uid; //global variable for userid
-
 function sendEmail() {
   let email = document.getElementById("exampleInputEmail1").value;
   console.log("email: " + email);
@@ -55,8 +53,9 @@ function sendCode() {
 
     console.log(content);
     if (content.body.success) {
-      uid = content.body.uid;
-      window.location.href = "/uploadresume.html";
+      let uid = content.body.uid;
+      let redURL = "/uploadresume.html?uid=" + uid;
+      window.location.href = redURL;
     } else {
       document.getElementById("verification-error").style.visibility =
         "visible";
@@ -93,8 +92,12 @@ function uploadResume() {
     console.log("content: " + content);
 
     if (content.body.success) {
-      window.location.href = "/editresume.html";
-      console.log("ade it");
+      let currURL = window.location.href;
+      let urlArray = currURL.split("?uid=");
+      let uid = urlArray[1];
+      let redURL = "/editresume.html?uid=" + uid;
+      window.location.href = redURL;
+      //console.log("ade it");
       //CHANGE THIS VARIABLE TO parsedResumeData after!!!
       let parsedResumeData2 = content.body.data; //json of parsed resume data
 
@@ -123,7 +126,7 @@ function uploadResume() {
         },
       };
 
-      populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
+      //populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
     } else {
       console.log("not successful upload of resume");
     }
@@ -157,8 +160,20 @@ let parsedResumeData = {
 
 //populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
 
-function populateResumeFields(parsedResumeData) {
-  console.log("called");
+function populateResumeFields(uid) {
+  async () => {
+    let fetchURL = "https://api.apply-ai.online/resume?uid=" + uid;
+    const rawResponse = await fetch(fetchURL, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const content = await rawResponse.json();
+  };
+  let parsedResumeData = content.body;
+  //console.log("called");
   document.getElementById("full-name").value = parsedResumeData.name;
   document.getElementById("email").value = parsedResumeData.email;
   document.getElementById("phone").value = parsedResumeData.phone_number;
@@ -221,11 +236,17 @@ function sendResumeUpdated() {
     },
   }; //data is the updated resume data json
 
+  let currURL = window.location.href;
+  let urlArray = currURL.split("?uid=");
+  let uid = urlArray[1];
+
   var formData = new FormData();
   formData.append("data", data); //data is the updated resume data json
   formData.append("uid", uid);
-  console.log("data: " + JSON.stringify(data));
-  window.location.href = "/viewjobs.html";
+  //console.log("data: " + JSON.stringify(data));
+
+  let redURL = "/viewjobs.html?uid=" + uid;
+  window.location.href = redURL;
 
   async () => {
     const rawResponse = await fetch("https://api.apply-ai.online/update", {
@@ -240,7 +261,11 @@ function sendResumeUpdated() {
 
     console.log("content: " + content);
     if (content.body.success) {
-      window.location.href = "/viewjobs.html";
+      let currURL = window.location.href;
+      let urlArray = currURL.split("?uid=");
+      let uid = urlArray[1];
+      let redURL = "/viewjobs.html?uid=" + uid;
+      window.location.href = redURL;
     } else {
       console.log("not successful update");
     }
@@ -321,7 +346,7 @@ function getJobs() {
     //displayJobs(content.body) //uncomment this LATER
   };
 }
-displayJobs(jobsList); //delete this later
+//displayJobs(jobsList); //delete this later
 
 function displayJobs(jobsList) {
   if (jobsList[0]) {
