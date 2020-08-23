@@ -268,9 +268,6 @@ function sendResumeUpdated() {
   formData.append("uid", uid);
   //console.log("data: " + JSON.stringify(data));
 
-  let redURL = "/viewjobs.html?uid=" + uid;
-  window.location.href = redURL;
-
   async () => {
     const rawResponse = await fetch("https://api.apply-ai.online/update", {
       method: "POST",
