@@ -365,7 +365,7 @@ function getJobs() {
     },
   })
     .then((response) => response.text())
-    .then((result) => displayJobs(JSON.parse(result)))
+    .then((result) => displayJobs(JSON.parse(result).data))
     .catch((error) => console.log("error", error));
 }
 
@@ -374,47 +374,50 @@ function displayJobs(jobsList) {
     document.getElementById("job-title1").innerHTML = jobsList[0].title;
     document.getElementById("job-company1").innerHTML = jobsList[0].company;
     document.getElementById("job-location1").innerHTML = jobsList[0].location;
-    document.getElementById("job-desc1").innerHTML = jobsList[0].description;
+    document.getElementById("job-desc1").innerHTML = jobsList[0].description.substr(0, 300) + '...';
     document.getElementById("job-link1").href = jobsList[0].link;
   }
   if (jobsList[1]) {
     document.getElementById("job-title2").innerHTML = jobsList[1].title;
     document.getElementById("job-company2").innerHTML = jobsList[1].company;
     document.getElementById("job-location2").innerHTML = jobsList[1].location;
-    document.getElementById("job-desc2").innerHTML = jobsList[1].description;
+    document.getElementById("job-desc2").innerHTML = jobsList[1].description.substr(0, 300) + '...';
     document.getElementById("job-link2").href = jobsList[1].link;
   }
   if (jobsList[2]) {
     document.getElementById("job-title3").innerHTML = jobsList[2].title;
     document.getElementById("job-company3").innerHTML = jobsList[2].company;
     document.getElementById("job-location3").innerHTML = jobsList[2].location;
-    document.getElementById("job-desc3").innerHTML = jobsList[2].description;
+    document.getElementById("job-desc3").innerHTML = jobsList[2].description.substr(0, 300) + '...';
     document.getElementById("job-link3").href = jobsList[2].link;
   }
   if (jobsList[3]) {
     document.getElementById("job-title4").innerHTML = jobsList[3].title;
     document.getElementById("job-company4").innerHTML = jobsList[3].company;
     document.getElementById("job-location4").innerHTML = jobsList[3].location;
-    document.getElementById("job-desc4").innerHTML = jobsList[3].description;
+    document.getElementById("job-desc4").innerHTML = jobsList[3].description.substr(0, 300) + '...';
     document.getElementById("job-link4").href = jobsList[3].link;
   }
   if (jobsList[4]) {
     document.getElementById("job-title5").innerHTML = jobsList[4].title;
     document.getElementById("job-company5").innerHTML = jobsList[4].company;
     document.getElementById("job-location5").innerHTML = jobsList[4].location;
-    document.getElementById("job-desc5").innerHTML = jobsList[4].description;
+    document.getElementById("job-desc5").innerHTML = jobsList[4].description.substr(0, 300) + '...';
     document.getElementById("job-link5").href = jobsList[4].link;
   }
   if (jobsList[5]) {
     document.getElementById("job-title6").innerHTML = jobsList[5].title;
     document.getElementById("job-company6").innerHTML = jobsList[5].company;
     document.getElementById("job-location6").innerHTML = jobsList[5].location;
-    document.getElementById("job-desc6").innerHTML = jobsList[5].description;
+    document.getElementById("job-desc6").innerHTML = jobsList[5].description.substr(0, 300) + '...';
     document.getElementById("job-link6").href = jobsList[5].link;
   }
 }
 
 function applyToJobs() {
+  let currURL = window.location.href;
+  let urlArray = currURL.split("?uid=");
+  let uid = urlArray[1];
   let jobApplyList = ""; //jobApplyList = "A.COM, B.COM, C.COM" //After apply display success alert and then return to homepage
 
   if (document.getElementById("job1-checkbox").checked) {
@@ -436,23 +439,22 @@ function applyToJobs() {
     jobApplyList += document.getElementById("job-link6").href;
   }
 
-  //console.log("joblist " + jobApplyList);
+  console.log("joblist " + jobApplyList);
 
   var formData = new FormData();
   formData.append("links", jobApplyList);
   formData.append("uid", uid);
-  async () => {
-    const rawResponse = await fetch("https://api.apply-ai.online/apply", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-    });
-    const content = await rawResponse.json();
-
-    console.log("content: " + content);
-    //displayJobs(content) //uncomment this LATER
-  };
+  
+  fetch("https://api.apply-ai.online/apply", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+    body: formData,
+  })
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
 
 !(function ($) {
