@@ -167,23 +167,22 @@ function populateResumeFields(parsedResumeData) {
   document.getElementById("school").value = "University of Waterloo";
   document.getElementById("school-info").value =
     parsedResumeData.degree.toUpperCase() + ", Computer Science";
-  document.getElementById("grad-year").value = "2022";
+  document.getElementById("grad-year").value = "2019";
   document.getElementById("company1").value = "Facebook";
-  document.getElementById("title1").value = "Software Engineer Intern";
-  document.getElementById("dates1").value = "May 2020-Aug 2020";
+  document.getElementById("title1").value = "Software Engineer";
+  document.getElementById("dates1").value = "May 2019-Aug 2020";
   document.getElementById("description1").value =
     "Built modern applications with JAVA, Spring, Spring Boot, SQL Server, No SQL.\n\nDeveloped microservices and Web Services (incl. REST/SOAP/WSDL/XML/SOA).\n\nBuilt on Pivotal Cloud Foundry Platform (Gradle, GitHub).\n\nContinuously integrated and deployed developed software. Updated the continuous integration/deployment scripts as necessary to improve continuous integration practices.";
 
   document.getElementById("company2").value = "Google";
-  document.getElementById("title2").value = "Software Engineer Intern";
-  document.getElementById("dates2").value = "May 2019-Aug 2019";
+  document.getElementById("title2").value = "Software Engineer";
+  document.getElementById("dates2").value = "June 2018-May 2019";
   document.getElementById("description2").value =
     "Composed an app to allow voice control of lights, garage door, and home thermostat, using an Amazon Echo and Raspberry Pi.\n\nBuilt a real-time stock picking app that compares the current price to Uniform Adjusted Financial Reporting Standards data to identify buy-now opportunities.\n\nBuilt new search functionality into the next generation StratoDB scalable database management system.";
 
   document.getElementById("company3").value = "Amazon";
-  document.getElementById("title3").value =
-    "Software Development Engineer Intern";
-  document.getElementById("dates3").value = "May 2018-Aug 2018";
+  document.getElementById("title3").value = "Software Development Engineer";
+  document.getElementById("dates3").value = "May 2017-Aug 2017";
   document.getElementById("description3").value =
     "Structure several internal systems comprising order entry/management tools, conversion/revenue reporting, and production workflow tracking, as well as designed custom REST APIs built in Python, Laravel PHP, and NodeJS.\n\nSuccessfully installed Linux servers and virtualized environments using Docker, Hyper-V, and Amazon Web Services.\n\nDesigned and implemented PHP web application, streamlining high-server traffic resource configuration and allocation.";
 }
@@ -248,6 +247,45 @@ function sendResumeUpdated() {
   };
 }
 
+let jobsList = {
+  [0]: {
+    title: "Software Engineer",
+    company: "Triplebyte",
+    location: "Toronto, ON",
+    description:
+      " We are rapidly growing our engineering team and looking for full-stack engineers, as well as engineering managers. Building the best…",
+    link:
+      "https://ca.indeed.com/jobs?q=software%20developer&l=Toronto%2C%20ON&vjk=9595115ffae80c9c&advn=1470358660901902",
+  },
+  [1]: {
+    title: "Software Development Engineer II",
+    company: "AMZN CAN Fulfillment Svcs, ULC",
+    location: "Toronto, ON",
+    description:
+      "At least 1 year of experience in the job offered or related position must involve providing technical leadership and project management for all aspects of the…",
+    link:
+      "https://ca.indeed.com/jobs?q=software%20developer&l=Toronto%2C%20ON&vjk=5c1e42e62bcc8dc9",
+  },
+  [2]: {
+    title: "Software Engineer",
+    company: "Synodic Inc",
+    location: "Toronto, ON",
+    description:
+      "Collect and document user's requirements and develop logical and physical specifications; Research, evaluate and synthesize technical information to design,",
+    link:
+      "https://ca.indeed.com/jobs?q=software%20developer&l=Toronto%2C%20ON&vjk=1d27b6bf8c22da38",
+  },
+  [3]: {
+    title: "Software Engineer",
+    company: "Pelmorex Media",
+    location: "Toronto, ON",
+    description:
+      "2-3 years of experience as a server-side software engineer. If you want hands on experience with high frequency, data driven systems, then this position will be…",
+    link:
+      "https://ca.indeed.com/jobs?q=software%20engineer&l=Toronto%2C%20ON&vjk=b070f862c816e2ba",
+  },
+};
+
 function getJobs() {
   console.log("this was called " + uid);
   let fetchURL = "https://api.apply-ai.online/uid=" + uid;
@@ -262,7 +300,19 @@ function getJobs() {
     const content = await rawResponse.json();
 
     console.log("content: " + content.body);
+    //displayJobs(content.body) //uncomment this LATER
   };
+}
+displayJobs(jobsList); //delete this later
+
+function displayJobs(jobsList) {
+  if (jobsList[0]) {
+    document.getElementById("job-title1").innerHTML = jobsList[0].title;
+    document.getElementById("job-company1").innerHTML = jobsList[0].company;
+    document.getElementById("job-location1").innerHTML = jobsList[0].location;
+    document.getElementById("job-desc1").innerHTML = jobsList[0].description;
+    document.getElementById("job-link1").href = jobsList[0].link;
+  }
 }
 
 !(function ($) {
