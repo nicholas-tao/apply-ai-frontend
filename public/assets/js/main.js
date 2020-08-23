@@ -49,8 +49,8 @@ function sendCode() {
     const content = await rawResponse.json();
 
     console.log(content);
-    if (content.body.success) {
-      let uid = content.body.uid;
+    if (content.success) {
+      let uid = content.uid;
       let redURL = "/uploadresume.html?uid=" + uid;
       window.location.href = redURL;
     } else {
@@ -87,7 +87,7 @@ function uploadResume() {
 
     console.log("content: " + content);
 
-    if (content.body.success) {
+    if (content.success) {
       let currURL = window.location.href;
       let urlArray = currURL.split("?uid=");
       let uid = urlArray[1];
@@ -95,7 +95,7 @@ function uploadResume() {
       window.location.href = redURL;
       //console.log("ade it");
       //CHANGE THIS VARIABLE TO parsedResumeData after!!!
-      let parsedResumeData2 = content.body.data; //json of parsed resume data
+      let parsedResumeData2 = content.data; //json of parsed resume data
 
       //this is a testing object representing the response i get from backend
       let parsedResumeData = {
@@ -167,7 +167,7 @@ function populateResumeFields(uid) {
     });
     const content = await rawResponse.json();
   };
-  let parsedResumeData = content.body;
+  let parsedResumeData = content;
   //console.log("called");
   document.getElementById("full-name").value = parsedResumeData.name;
   document.getElementById("email").value = parsedResumeData.email;
@@ -255,7 +255,7 @@ function sendResumeUpdated() {
     const content = await rawResponse.json();
 
     console.log("content: " + content);
-    if (content.body.success) {
+    if (content.success) {
       let currURL = window.location.href;
       let urlArray = currURL.split("?uid=");
       let uid = urlArray[1];
@@ -336,8 +336,8 @@ function getJobs() {
     });
     const content = await rawResponse.json();
 
-    console.log("content: " + content.body);
-    //displayJobs(content.body) //uncomment this LATER
+    console.log("content: " + content);
+    //displayJobs(content) //uncomment this LATER
   };
 }
 //displayJobs(jobsList); //delete this later
@@ -423,8 +423,8 @@ function applyToJobs() {
     });
     const content = await rawResponse.json();
 
-    console.log("content: " + content.body);
-    //displayJobs(content.body) //uncomment this LATER
+    console.log("content: " + content);
+    //displayJobs(content) //uncomment this LATER
   };
 }
 
