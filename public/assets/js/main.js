@@ -197,13 +197,10 @@ function fooFunction2(result) {
   document.getElementById("skills").value =
     "JAVA, Spring, Spring Boot, SQL, REST/SOAP/WSDL/WSL/SOA, Grade, GitHub, Rasberry Pi, Python, Laravel, PHP, NodeJS, Docker, Amazon Web Services";
   document.getElementById("school").value = "University of Waterloo";
-  if (parsedResumeData.degree) {
-    document.getElementById("school-info").value =
-      parsedResumeData.degree.toUpperCase() + ", Computer Science";
-  } else {
-    document.getElementById("school-info").value =
-      "Bachelor of Computer Science, Computer Science";
-  }
+
+  document.getElementById("school-info").value =
+    "Bachelor of Computer Science, Computer Science";
+
   document.getElementById("grad-year").value = "2018";
   document.getElementById("company1").value = "Facebook";
   document.getElementById("title1").value = "Software Engineer";
@@ -279,20 +276,20 @@ function sendResumeUpdated() {
     .then((result) => fooFunction3(result, uid))
     .catch((error) => console.log("error", error));
 }
-    
+
 function fooFunction3(result, uid) {
   const content = JSON.parse(result);
 
-    console.log("content: " + content);
-    if (content.success) {
-      let currURL = window.location.href;
-      let urlArray = currURL.split("?uid=");
-      let uid = urlArray[1];
-      let redURL = "/viewjobs.html?uid=" + uid;
-      window.location.href = redURL;
-    } else {
-      console.log("not successful update");
-    }
+  console.log("content: " + content);
+  if (content.success) {
+    let currURL = window.location.href;
+    let urlArray = currURL.split("?uid=");
+    let uid = urlArray[1];
+    let redURL = "/viewjobs.html?uid=" + uid;
+    window.location.href = redURL;
+  } else {
+    console.log("not successful update");
+  }
 }
 
 let jobsList = {
@@ -374,42 +371,48 @@ function displayJobs(jobsList) {
     document.getElementById("job-title1").innerHTML = jobsList[0].title;
     document.getElementById("job-company1").innerHTML = jobsList[0].company;
     document.getElementById("job-location1").innerHTML = jobsList[0].location;
-    document.getElementById("job-desc1").innerHTML = jobsList[0].description.substr(0, 300) + '...';
+    document.getElementById("job-desc1").innerHTML =
+      jobsList[0].description.substr(0, 300) + "...";
     document.getElementById("job-link1").href = jobsList[0].link;
   }
   if (jobsList[1]) {
     document.getElementById("job-title2").innerHTML = jobsList[1].title;
     document.getElementById("job-company2").innerHTML = jobsList[1].company;
     document.getElementById("job-location2").innerHTML = jobsList[1].location;
-    document.getElementById("job-desc2").innerHTML = jobsList[1].description.substr(0, 300) + '...';
+    document.getElementById("job-desc2").innerHTML =
+      jobsList[1].description.substr(0, 300) + "...";
     document.getElementById("job-link2").href = jobsList[1].link;
   }
   if (jobsList[2]) {
     document.getElementById("job-title3").innerHTML = jobsList[2].title;
     document.getElementById("job-company3").innerHTML = jobsList[2].company;
     document.getElementById("job-location3").innerHTML = jobsList[2].location;
-    document.getElementById("job-desc3").innerHTML = jobsList[2].description.substr(0, 300) + '...';
+    document.getElementById("job-desc3").innerHTML =
+      jobsList[2].description.substr(0, 300) + "...";
     document.getElementById("job-link3").href = jobsList[2].link;
   }
   if (jobsList[3]) {
     document.getElementById("job-title4").innerHTML = jobsList[3].title;
     document.getElementById("job-company4").innerHTML = jobsList[3].company;
     document.getElementById("job-location4").innerHTML = jobsList[3].location;
-    document.getElementById("job-desc4").innerHTML = jobsList[3].description.substr(0, 300) + '...';
+    document.getElementById("job-desc4").innerHTML =
+      jobsList[3].description.substr(0, 300) + "...";
     document.getElementById("job-link4").href = jobsList[3].link;
   }
   if (jobsList[4]) {
     document.getElementById("job-title5").innerHTML = jobsList[4].title;
     document.getElementById("job-company5").innerHTML = jobsList[4].company;
     document.getElementById("job-location5").innerHTML = jobsList[4].location;
-    document.getElementById("job-desc5").innerHTML = jobsList[4].description.substr(0, 300) + '...';
+    document.getElementById("job-desc5").innerHTML =
+      jobsList[4].description.substr(0, 300) + "...";
     document.getElementById("job-link5").href = jobsList[4].link;
   }
   if (jobsList[5]) {
     document.getElementById("job-title6").innerHTML = jobsList[5].title;
     document.getElementById("job-company6").innerHTML = jobsList[5].company;
     document.getElementById("job-location6").innerHTML = jobsList[5].location;
-    document.getElementById("job-desc6").innerHTML = jobsList[5].description.substr(0, 300) + '...';
+    document.getElementById("job-desc6").innerHTML =
+      jobsList[5].description.substr(0, 300) + "...";
     document.getElementById("job-link6").href = jobsList[5].link;
   }
 }
@@ -444,7 +447,7 @@ function applyToJobs() {
   var formData = new FormData();
   formData.append("links", jobApplyList);
   formData.append("uid", uid);
-  
+
   fetch("https://api.apply-ai.online/apply", {
     method: "POST",
     headers: {
