@@ -90,19 +90,47 @@ function uploadResume() {
     },
     body: formData,
   })
-    .then((response) => response.json())
-    .then((data) => {
-      content = JSON.parse(data);
-    });
+    .then((response) => response.text())
+    .then((result) => fooFunction(result, uid))
+    .catch((error) => console.log("error", error));
+}
 
-  console.log("content.success: " + content.success);
+//this is a testing object representing the response i get from backend
+let parsedResumeData = {
+  name: "zaina qasim",
+  phone_number: "(513) 739 4757",
+  email: "qasimza@mail.uc.edu",
+  degree: "bs",
+  locations: ["cincinnati", "matlab", "india"],
+  skills: [
+    "java, python, c++",
+    "adobe indesign",
+    "adobe illustrator",
+    "adobe dreamweaver",
+    "microsoft",
+    "coursera",
+    "university of cincinnati",
+    "ieee@uc",
+    "indian council of secondary education",
+    "infinera corporation",
+  ],
+  socials: {
+    linkedin: "linkedin.com/in/zaina-qasim-87706a17b",
+    github: "https://github.com/qasimza",
+  },
+};
 
-  if (content.success) {
+//populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
+
+function fooFunction(result, uid) {
+  console.log("Result: " + result);
+  let res = JSON.parse(result);
+  if (res.success) {
     let redURL = "/editresume.html?uid=" + uid;
     window.location.href = redURL;
     //console.log("ade it");
     //CHANGE THIS VARIABLE TO parsedResumeData after!!!
-    let parsedResumeData2 = content.data; //json of parsed resume data
+    // let parsedResumeData2 = content.data; //json of parsed resume data
 
     //this is a testing object representing the response i get from backend
     let parsedResumeData = {
@@ -135,56 +163,48 @@ function uploadResume() {
   }
 }
 
-//this is a testing object representing the response i get from backend
-let parsedResumeData = {
-  name: "zaina qasim",
-  phone_number: "(513) 739 4757",
-  email: "qasimza@mail.uc.edu",
-  degree: "bs",
-  locations: ["cincinnati", "matlab", "india"],
-  skills: [
-    "java, python, c++",
-    "adobe indesign",
-    "adobe illustrator",
-    "adobe dreamweaver",
-    "microsoft",
-    "coursera",
-    "university of cincinnati",
-    "ieee@uc",
-    "indian council of secondary education",
-    "infinera corporation",
-  ],
-  socials: {
-    linkedin: "linkedin.com/in/zaina-qasim-87706a17b",
-    github: "https://github.com/qasimza",
-  },
-};
-
-//populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
-
 function populateResumeFields(uid) {
   let parsedResumeData = {};
-  async () => {
-    let fetchURL = "https://api.apply-ai.online/resume?uid=" + uid;
-    const rawResponse = await fetch(fetchURL, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    });
-    const content = await rawResponse.json();
-    parsedResumeData = content;
-  };
-  //console.log("called");
+
+  let fetchURL = "https://api.apply-ai.online/resume?uid=" + uid;
+
+  fetch(fetchURL, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => fooFunction2(result))
+    .catch((error) => console.log("error", error));
+}
+
+function fooFunction2(result) {
+  let parsedResumeData2 = JSON.parse(result);
+  let parsedResumeData = parsedResumeData2.data;
+  console.log(parsedResumeData);
+  /*
   document.getElementById("full-name").value = parsedResumeData.name;
   document.getElementById("email").value = parsedResumeData.email;
   document.getElementById("phone").value = parsedResumeData.phone_number;
   document.getElementById("linkedin").value = parsedResumeData.socials.linkedin;
   document.getElementById("skills").value = parsedResumeData.skills;
+  */
+  document.getElementById("full-name").value = "John Doe";
+  document.getElementById("email").value = "john.doe@gmail.com";
+  document.getElementById("phone").value = "+1-123-456-7890";
+  document.getElementById("linkedin").value = "linkedin.com/johnode";
+  document.getElementById("skills").value = parsedResumeData.skills;
   document.getElementById("school").value = "University of Waterloo";
-  document.getElementById("school-info").value =
-    parsedResumeData.degree.toUpperCase() + ", Computer Science";
-  document.getElementById("grad-year").value = "2019";
+  if (parsedResumeData.degree) {
+    document.getElementById("school-info").value =
+      parsedResumeData.degree.toUpperCase() + ", Computer Science";
+  } else {
+    document.getElementById(
+      "school-info"
+    ).value = +"Bachelor of Computer Science, Computer Science";
+  }
+  document.getElementById("grad-year").value = "2018";
   document.getElementById("company1").value = "Facebook";
   document.getElementById("title1").value = "Software Engineer";
   document.getElementById("dates1").value = "May 2019-Aug 2020";
