@@ -264,19 +264,24 @@ function sendResumeUpdated() {
   let uid = urlArray[1];
 
   var formData = new FormData();
-  formData.append("data", data); //data is the updated resume data json
+  formData.append("data", JSON.stringify(data)); //data is the updated resume data json
   formData.append("uid", uid);
-  //console.log("data: " + JSON.stringify(data));
+  console.log("data: " + JSON.stringify(data));
 
-  async () => {
-    const rawResponse = await fetch("https://api.apply-ai.online/update", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    });
-    const content = await rawResponse.json();
+  fetch("https://api.apply-ai.online/update", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+    },
+    body: formData,
+  })
+    .then((response) => response.text())
+    .then((result) => fooFunction3(result, uid))
+    .catch((error) => console.log("error", error));
+}
+    
+function fooFunction3(result, uid) {
+  const content = JSON.parse(result);
 
     console.log("content: " + content);
     if (content.success) {
@@ -288,7 +293,6 @@ function sendResumeUpdated() {
     } else {
       console.log("not successful update");
     }
-  };
 }
 
 let jobsList = {
@@ -353,20 +357,16 @@ function getJobs() {
   let urlArray = currURL.split("?uid=");
   let uid = urlArray[1];
   let fetchURL = "https://api.apply-ai.online/jobs?uid=" + uid;
-  displayJobs(jobsList); //delete this later
 
-  async () => {
-    const rawResponse = await fetch(fetchURL, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    });
-    const content = await rawResponse.json();
-
-    console.log("content: " + content);
-    //displayJobs(content) //uncomment this LATER
-  };
+  fetch(fetchURL, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => displayJobs(JSON.parse(result)))
+    .catch((error) => console.log("error", error));
 }
 
 function displayJobs(jobsList) {
