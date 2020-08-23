@@ -354,16 +354,14 @@ function getJobs() {
   let urlArray = currURL.split("?uid=");
   let uid = urlArray[1];
   let fetchURL = "https://api.apply-ai.online/jobs?uid=" + uid;
-
   fetch(fetchURL, {
     method: "GET",
     headers: {
       Accept: "application/json",
     },
-  })
-    .then((response) => response.text())
-    .then((result) => displayJobs(JSON.parse(result).data))
-    .catch((error) => console.log("error", error));
+  }).then((response) => response.text());
+
+  displayJobs(jobsList);
 }
 
 function displayJobs(jobsList) {
