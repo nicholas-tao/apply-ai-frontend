@@ -359,9 +359,12 @@ function getJobs() {
     headers: {
       Accept: "application/json",
     },
-  }).then((response) => response.text());
+  })
+    .then((response) => response.text())
+    .then((result) => displayJobs(JSON.parse(result).data))
+    .catch((error) => console.log("error", error));
 
-  displayJobs(jobsList);
+  // displayJobs(jobsList);
 }
 
 function displayJobs(jobsList) {
