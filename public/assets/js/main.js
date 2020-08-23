@@ -190,13 +190,14 @@ function populateResumeFields(uid) {
   document.getElementById("title2").value = "Software Engineer";
   document.getElementById("dates2").value = "June 2018-May 2019";
   document.getElementById("description2").value =
-    "Composed an app to allow voice control of lights, garage door, and home thermostat, using an Amazon Echo and Raspberry Pi.\n\nBuilt a real-time stock picking app that compares the current price to Uniform Adjusted Financial Reporting Standards data to identify buy-now opportunities.\n\nBuilt new search functionality into the next generation StratoDB scalable database management system.";
+    "Composed an app to allow voice control of lights, garage door, and home thermostat, using an Amazon Echo and Raspberry Pi.\n\nBuilt a real-time stock picking app that compares the current price to Uniform Adjusted Financial Reporting Standards data to identify buy-now opportunities.\n\nBuilt new search functionality into the next generation StratoDB scalable database management system.\n\nBulk data processing and injection service from Hadoop to Cassandra and provides a thin REST layer on top for serving offline computed data online.";
 
   document.getElementById("company3").value = "Amazon";
-  document.getElementById("title3").value = "Software Development Engineer";
+  document.getElementById("title3").value =
+    "Software Development Engineer Intern";
   document.getElementById("dates3").value = "May 2017-Aug 2017";
   document.getElementById("description3").value =
-    "Structure several internal systems comprising order entry/management tools, conversion/revenue reporting, and production workflow tracking, as well as designed custom REST APIs built in Python, Laravel PHP, and NodeJS.\n\nSuccessfully installed Linux servers and virtualized environments using Docker, Hyper-V, and Amazon Web Services.\n\nDesigned and implemented PHP web application, streamlining high-server traffic resource configuration and allocation.";
+    "Structure several internal systems comprising order entry/management tools, conversion/revenue reporting, and production workflow tracking, as well as designed custom REST APIs built in Python, Laravel PHP, and NodeJS.\n\nSuccessfully installed Linux servers and virtualized environments using Docker, Hyper-V, and Amazon Web Services.\n\nDesigned and implemented PHP web application, streamlining high-server traffic resource configuration and allocation.\n\nSetup, schema design and management of Amazon Redshift. Built an internal app for access to the data using a web interface. Dataduct integration for daily ETL injection into Redshift.";
 }
 
 function sendResumeUpdated() {
