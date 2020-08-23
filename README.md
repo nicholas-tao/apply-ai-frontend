@@ -1,5 +1,13 @@
 # ApplyAI (apply-ai.online)
 
+[Visit Devpost Page](https://devpost.com/software/applyai)
+
+[Demo Video](https://www.youtube.com/watch?v=7Sxl3rX8u4U)
+
+[Front End Repo](https://github.com/nicholas-tao/apply-ai-frontend)
+
+[Parsers](https://github.com/qasimza/apply-ai-parsers)
+
 ## Inspiration
 
 As a result of the COVID-19 pandemic, millions of people lost their jobs and the US unemployment rate reached an all-time-high of nearly 15% in April of 2020. Job hunting has never been easy. It's time consuming, repetitive, and draining.
