@@ -91,7 +91,7 @@ function uploadResume() {
     body: formData,
   })
     .then((response) => response.text())
-    .then((result) => fooFunction(result, uid))
+    .then((result) => fooFunction(JSON.parse(result).data, uid))
     .catch((error) => console.log("error", error));
 }
 
@@ -130,7 +130,7 @@ function fooFunction(result, uid) {
     window.location.href = redURL;
     //console.log("ade it");
     //CHANGE THIS VARIABLE TO parsedResumeData after!!!
-    // let parsedResumeData2 = content.data; //json of parsed resume data
+    let parsedResumeData2 = result; //json of parsed resume data
 
     //this is a testing object representing the response i get from backend
     let parsedResumeData = {
@@ -157,7 +157,7 @@ function fooFunction(result, uid) {
       },
     };
 
-    //populateResumeFields(parsedResumeData); //populate resume data textfields with data from parsedResumeData HERE!!!
+    populateResumeFields(parsedResumeData2); //populate resume data textfields with data from parsedResumeData HERE!!!
   } else {
     console.log("not successful upload of resume");
   }
