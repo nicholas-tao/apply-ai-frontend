@@ -401,23 +401,10 @@ function applyToJobs() {
   let uid = urlArray[1];
   let jobApplyList = ""; //jobApplyList = "A.COM, B.COM, C.COM" //After apply display success alert and then return to homepage
 
-  if (document.getElementById("job1-checkbox").checked) {
-    jobApplyList += document.getElementById("job-link1").href + ", ";
-  }
-  if (document.getElementById("job2-checkbox").checked) {
-    jobApplyList += document.getElementById("job-link2").href + ", ";
-  }
-  if (document.getElementById("job3-checkbox").checked) {
-    jobApplyList += document.getElementById("job-link3").href + ", ";
-  }
-  if (document.getElementById("job4-checkbox").checked) {
-    jobApplyList += document.getElementById("job-link4").href + ", ";
-  }
-  if (document.getElementById("job5-checkbox").checked) {
-    jobApplyList += document.getElementById("job-link5").href + ", ";
-  }
-  if (document.getElementById("job6-checkbox").checked) {
-    jobApplyList += document.getElementById("job-link6").href;
+  for (let j = 0; j < 6; j++) {
+    if (document.getElementById("job" + (j + 1) + "-checkbox").checked) {
+      jobApplyList += document.getElementById("job-link" + (j + 1)).href + ", ";
+    }
   }
 
   console.log("joblist " + jobApplyList);
