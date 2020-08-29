@@ -380,53 +380,18 @@ function getJobs() {
 }
 
 function displayJobs(jobsList) {
-  if (jobsList[0]) {
-    document.getElementById("job-title1").innerHTML = jobsList[0].title;
-    document.getElementById("job-company1").innerHTML = jobsList[0].company;
-    document.getElementById("job-location1").innerHTML = jobsList[0].location;
-    document.getElementById("job-desc1").innerHTML =
-      jobsList[0].description.substr(0, 300) + "...";
-    document.getElementById("job-link1").href = jobsList[0].link;
-  }
-  if (jobsList[1]) {
-    document.getElementById("job-title2").innerHTML = jobsList[1].title;
-    document.getElementById("job-company2").innerHTML = jobsList[1].company;
-    document.getElementById("job-location2").innerHTML = jobsList[1].location;
-    document.getElementById("job-desc2").innerHTML =
-      jobsList[1].description.substr(0, 300) + "...";
-    document.getElementById("job-link2").href = jobsList[1].link;
-  }
-  if (jobsList[2]) {
-    document.getElementById("job-title3").innerHTML = jobsList[2].title;
-    document.getElementById("job-company3").innerHTML = jobsList[2].company;
-    document.getElementById("job-location3").innerHTML = jobsList[2].location;
-    document.getElementById("job-desc3").innerHTML =
-      jobsList[2].description.substr(0, 300) + "...";
-    document.getElementById("job-link3").href = jobsList[2].link;
-  }
-  if (jobsList[3]) {
-    document.getElementById("job-title4").innerHTML = jobsList[3].title;
-    document.getElementById("job-company4").innerHTML = jobsList[3].company;
-    document.getElementById("job-location4").innerHTML = jobsList[3].location;
-    document.getElementById("job-desc4").innerHTML =
-      jobsList[3].description.substr(0, 300) + "...";
-    document.getElementById("job-link4").href = jobsList[3].link;
-  }
-  if (jobsList[4]) {
-    document.getElementById("job-title5").innerHTML = jobsList[4].title;
-    document.getElementById("job-company5").innerHTML = jobsList[4].company;
-    document.getElementById("job-location5").innerHTML = jobsList[4].location;
-    document.getElementById("job-desc5").innerHTML =
-      jobsList[4].description.substr(0, 300) + "...";
-    document.getElementById("job-link5").href = jobsList[4].link;
-  }
-  if (jobsList[5]) {
-    document.getElementById("job-title6").innerHTML = jobsList[5].title;
-    document.getElementById("job-company6").innerHTML = jobsList[5].company;
-    document.getElementById("job-location6").innerHTML = jobsList[5].location;
-    document.getElementById("job-desc6").innerHTML =
-      jobsList[5].description.substr(0, 300) + "...";
-    document.getElementById("job-link6").href = jobsList[5].link;
+  for (let j = 0; j < 6; j++) {
+    if (jobsList[j]) {
+      document.getElementById("job-title" + (j + 1)).innerHTML =
+        jobsList[j].title;
+      document.getElementById("job-company" + (j + 1)).innerHTML =
+        jobsList[j].company;
+      document.getElementById("job-location" + (j + 1)).innerHTML =
+        jobsList[j].location;
+      document.getElementById("job-desc" + (j + 1)).innerHTML =
+        jobsList[j].description.substr(0, 300) + "...";
+      document.getElementById("job-link" + (j + 1)).href = jobsList[j].link;
+    }
   }
 }
 
