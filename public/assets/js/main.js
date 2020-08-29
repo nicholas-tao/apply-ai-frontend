@@ -304,6 +304,7 @@ function fooFunction3(result, uid) {
   }
 }
 
+//an object used for testing purposes
 let jobsList = {
   [0]: {
     title: "Software Engineer",
@@ -376,7 +377,7 @@ function getJobs() {
     .then((result) => displayJobs(JSON.parse(result).data))
     .catch((error) => console.log("error", error));
 
-  // displayJobs(jobsList);
+  // displayJobs(jobsList); //this was for testing purposes only
 }
 
 function displayJobs(jobsList) {
