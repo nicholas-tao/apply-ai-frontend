@@ -1,5 +1,9 @@
 # ApplyAI (apply-ai.online)
 
+**Job hunting, made easy**
+
+![Demo Gif](https://github.com/nicholas-tao/apply-ai-frontend/blob/master/gifs/demo.gif)
+
 [Live Version](https://apply-ai.online)
 
 [Visit Devpost Page](https://devpost.com/software/applyai)
